@@ -40,6 +40,17 @@
 			<artifactId>netty-all</artifactId>
 			<version>5.0.0.Alpha1</version>
 		</dependency>
+		<!--   protobuf的依赖   -->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java-util</artifactId>
+			<version>3.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
