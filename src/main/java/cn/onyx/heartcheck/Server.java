@@ -1,4 +1,4 @@
-package cn.onyx.helloworld;
+package cn.onyx.heartcheck;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -7,7 +7,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.ReadTimeoutHandler;
 
 public class Server {
     public static void main(String[] args) throws InterruptedException {
@@ -20,35 +22,29 @@ public class Server {
         ServerBootstrap bootstrap = new ServerBootstrap();
         //绑定两个线程组
         bootstrap.group(connect,handle);
-        //制定NIO的模式,服务端这里是NioServerSocketChannel
+        //制定NIO的模式
         bootstrap.channel(NioServerSocketChannel.class);
-        //进行服务端的参数的设置...
-        bootstrap.option(ChannelOption.SO_BACKLOG,1024);//tcp缓冲区
-        bootstrap.option(ChannelOption.SO_SNDBUF,32*1024);//发送缓冲大小
-        bootstrap.option(ChannelOption.SO_RCVBUF,32*1024);//接收缓冲大小
-        bootstrap.option(ChannelOption.SO_KEEPALIVE,true);//保持连接
-        //不管是服务端还是客户端这里都是SocketChannel
+        bootstrap.option(ChannelOption.SO_BACKLOG,1024);//tcp缓冲区\
+        //设置日志
+        bootstrap.handler(new LoggingHandler(LogLevel.INFO));
         bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 //3.配置具体数据接收方法的处理
+
+                //超时的处理
+                ch.pipeline().addLast(new ReadTimeoutHandler(5));
                 ch.pipeline().addLast(new ServerHandle());
             }
         });
 
-        //4.进行绑定,服务端只需要绑定端口号
+        //4.进行绑定
         ChannelFuture future = bootstrap.bind(8080).sync();
 
         future.channel().closeFuture().sync();
 
-
-        //再次绑定个其他的端口,进行服务的提供
-        ChannelFuture future1 = bootstrap.bind(8081).sync();
-        future1.channel().closeFuture().sync();
-
         connect.shutdownGracefully();
         handle.shutdownGracefully();
-
 
     }
 }

@@ -17,13 +17,16 @@ public class Client {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(loopGroup);
 
+        //客户端这里是NioSocketChannel
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
+            //不管是客户端还是服务端这里都是SocketChannel
             protected void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline().addLast(new ClientHandle());
             }
         });
+        //这里需要绑定服务端的ip和端口号
         ChannelFuture future = bootstrap.connect("127.0.0.1", 8080);
 
         Channel channel = future.channel();
