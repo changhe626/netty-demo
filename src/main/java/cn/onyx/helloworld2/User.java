@@ -1,20 +1,17 @@
-package cn.onyx.heartcheck;
+package cn.onyx.helloworld2;
 
 import java.io.Serializable;
 
 /**
- * @author zhangke
+ * 要实现Serializable接口
+ * 因为要在网络上传输...
  */
-public class Request implements Serializable{
+public class User implements Serializable{
 
     private static final long SerialVersionUID=1L;
 
     private int id;
     private String name;
-    private String  requestMessage;
-
-    public Request() {
-    }
 
 
     public int getId() {
@@ -33,12 +30,11 @@ public class Request implements Serializable{
         this.name = name;
     }
 
-
-    public String getRequestMessage() {
-        return requestMessage;
-    }
-
-    public void setRequestMessage(String requestMessage) {
-        this.requestMessage = requestMessage;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

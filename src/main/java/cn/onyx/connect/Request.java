@@ -1,14 +1,21 @@
-package cn.onyx.heartcheck;
+package cn.onyx.connect;
 
 import java.io.Serializable;
 
-public class Response implements Serializable{
+/**
+ * @author zhangke
+ */
+public class Request implements Serializable{
 
     private static final long SerialVersionUID=1L;
 
     private int id;
     private String name;
-    private String  responseMessage;
+    private String  requestMessage;
+
+    public Request() {
+    }
+
 
     public int getId() {
         return id;
@@ -26,11 +33,12 @@ public class Response implements Serializable{
         this.name = name;
     }
 
-    public String getResponseMessage() {
-        return responseMessage;
+
+    public String getRequestMessage() {
+        return requestMessage;
     }
 
-    public void setResponseMessage(String responseMessage) {
-        this.responseMessage = responseMessage;
+    public void setRequestMessage(String requestMessage) {
+        this.requestMessage = requestMessage;
     }
 }

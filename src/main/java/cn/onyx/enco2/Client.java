@@ -23,6 +23,7 @@ public class Client {
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
+                //固定长度...
                 ch.pipeline().addLast(new FixedLengthFrameDecoder(5));
                 ch.pipeline().addLast(new StringDecoder());
                 ch.pipeline().addLast(new ClientHandle());

@@ -22,8 +22,10 @@ public class Client {
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
+                //通过Unpooled.copiedBuffer工具类,把字符串变成ByteBuf....
                 ByteBuf buf = Unpooled.copiedBuffer("$_".getBytes());
                 ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,buf));
+                //进行编码
                 ch.pipeline().addLast(new StringDecoder());
                 ch.pipeline().addLast(new ClientHandle());
             }

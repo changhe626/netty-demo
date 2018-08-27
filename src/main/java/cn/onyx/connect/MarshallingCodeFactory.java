@@ -1,4 +1,4 @@
-package cn.onyx.heartcheck;
+package cn.onyx.connect;
 
 import io.netty.handler.codec.marshalling.MarshallingDecoder;
 
