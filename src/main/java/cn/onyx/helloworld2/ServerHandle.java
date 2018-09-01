@@ -1,12 +1,10 @@
 package cn.onyx.helloworld2;
 
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ServerHandle extends ChannelHandlerAdapter {
+public class ServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
@@ -32,13 +30,6 @@ public class ServerHandle extends ChannelHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        //也只是激活一次
-        System.out.println("激活通道...");
-
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("读取完成...");
+        System.out.println("激活了");
     }
 }

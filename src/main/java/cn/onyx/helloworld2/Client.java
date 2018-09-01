@@ -30,7 +30,7 @@ public class Client {
 
                 //添加自定义的编码器和解码器
                 //添加pojo对象解码器,禁止缓存类加载器
-                ch.pipeline().addLast(new ObjectDecoder(1024, ClassResolvers.cacheDisabled(this.getClass().getClassLoader())));
+                ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(this.getClass().getClassLoader())));
 
                 //设置发送消息解码器
                 ch.pipeline().addLast(new ObjectEncoder());
@@ -42,12 +42,6 @@ public class Client {
         ChannelFuture future = bootstrap.connect("127.0.0.1", 8080);
 
         Channel channel = future.channel();
-
-        //向服务的发送数据
-        User user = new User();
-        user.setId(1);
-        user.setName("zhaojun");
-        channel.writeAndFlush(user);
 
         channel.closeFuture().sync();
         loopGroup.shutdownGracefully();

@@ -24,9 +24,8 @@ public class Server {
         bootstrap.channel(NioServerSocketChannel.class);
         //进行服务端的参数的设置...
         bootstrap.option(ChannelOption.SO_BACKLOG,1024);//tcp缓冲区
-        bootstrap.option(ChannelOption.SO_SNDBUF,32*1024);//发送缓冲大小
-        bootstrap.option(ChannelOption.SO_RCVBUF,32*1024);//接收缓冲大小
-        bootstrap.option(ChannelOption.SO_KEEPALIVE,true);//保持连接
+        //bootstrap.option(ChannelOption.SO_SNDBUF,32*1024);//发送缓冲大小
+        //bootstrap.option(ChannelOption.SO_RCVBUF,32*1024);//接收缓冲大小
         //不管是服务端还是客户端这里都是SocketChannel
         bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
             @Override

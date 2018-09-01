@@ -4,10 +4,10 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelHandlerInvoker;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.concurrent.EventExecutorGroup;
 
-public class ServerHandle extends ChannelHandlerAdapter {
+public class ServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {

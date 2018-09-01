@@ -24,7 +24,6 @@ public class EchoServer {
         this.port = port;
     }
 
-
     public void run() throws InterruptedException {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -40,13 +39,9 @@ public class EchoServer {
                     socketChannel.pipeline().addLast(new EchoServerHandle());
                 }
             });
-
             bootstrap=bootstrap.option(ChannelOption.SO_BACKLOG,100);
-
             bootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
-
             ChannelFuture future = bootstrap.bind(port).sync();
-
             future.channel().closeFuture().sync();
         }finally {
             bossGroup.shutdownGracefully();

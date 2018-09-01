@@ -3,14 +3,20 @@ package cn.onyx.helloworld;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
-public class ClientHandle extends ChannelHandlerAdapter {
+public class ClientHandle extends ChannelInboundHandlerAdapter {
+
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        //只激活一次
-        System.out.println("客户端的读取激活了");
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("add");
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("removed");
     }
 
     @Override
@@ -27,10 +33,6 @@ public class ClientHandle extends ChannelHandlerAdapter {
             //否则链接多了就会造成缓冲区的溢出
             ReferenceCountUtil.release(msg);
         }
-
-
-
-
     }
 
     @Override

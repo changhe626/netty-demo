@@ -6,7 +6,6 @@ import io.netty.util.ReferenceCountUtil;
 
 public class ClientHandle extends ChannelHandlerAdapter {
 
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
             AddressBookProtos.Person msg1 = (AddressBookProtos.Person) msg;

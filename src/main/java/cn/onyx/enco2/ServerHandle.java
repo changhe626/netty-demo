@@ -3,8 +3,9 @@ package cn.onyx.enco2;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ServerHandle extends ChannelHandlerAdapter {
+public class ServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {

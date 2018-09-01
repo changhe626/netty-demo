@@ -1,17 +1,11 @@
 package cn.onyx.helloworld2;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
-public class ClientHandle extends ChannelHandlerAdapter {
+public class ClientHandle extends ChannelInboundHandlerAdapter {
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        //只激活一次
-        System.out.println("客户端的读取激活了");
-    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -24,10 +18,6 @@ public class ClientHandle extends ChannelHandlerAdapter {
             //否则链接多了就会造成缓冲区的溢出
             ReferenceCountUtil.release(msg);
         }
-
-
-
-
     }
 
     @Override
@@ -39,5 +29,15 @@ public class ClientHandle extends ChannelHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
         cause.getClass();
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("激活了");
+        //向服务的发送数据
+        User user = new User();
+        user.setId(1);
+        user.setName("zhaojun");
+        ctx.writeAndFlush(user);
     }
 }

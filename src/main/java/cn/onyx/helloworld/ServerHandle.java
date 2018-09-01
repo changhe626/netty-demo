@@ -6,8 +6,9 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ServerHandle extends ChannelHandlerAdapter {
+public class ServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
@@ -16,6 +17,16 @@ public class ServerHandle extends ChannelHandlerAdapter {
     }
 
     @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("add");
+    }
+
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("removed");
+    }
+
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         int i = buf.readableBytes();

@@ -5,7 +5,6 @@ import io.netty.channel.ChannelHandlerContext;
 
 public class ServerHandler extends ChannelHandlerAdapter {
 
-    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         AddressBookProtos.Person person = (AddressBookProtos.Person) msg;
         System.out.println(person);

@@ -3,11 +3,12 @@ package cn.onyx.netty3;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TimeClientHandler extends ChannelHandlerAdapter {
+public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

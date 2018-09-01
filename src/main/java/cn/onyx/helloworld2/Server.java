@@ -26,9 +26,7 @@ public class Server {
         bootstrap.channel(NioServerSocketChannel.class);
         //进行服务端的参数的设置...
         bootstrap.option(ChannelOption.SO_BACKLOG,1024);//tcp缓冲区
-        bootstrap.option(ChannelOption.SO_SNDBUF,32*1024);//发送缓冲大小
-        bootstrap.option(ChannelOption.SO_RCVBUF,32*1024);//接收缓冲大小
-        bootstrap.option(ChannelOption.SO_KEEPALIVE,true);//保持连接
+        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
         //不管是服务端还是客户端这里都是SocketChannel
         bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
             @Override
@@ -37,7 +35,7 @@ public class Server {
 
                 //添加对象解码器,负责对序列化pojo对象进行解码,设置对象序列化对大长度为1M,防止内存溢出
                 //设置线程安全的WeakReferenceMap对类加载器进行缓存,支持多线程并发访问防止内存溢出
-                ch.pipeline().addLast(new ObjectDecoder(1024*1024, ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())));
+                ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(getClass().getClassLoader())));
 
                 //添加对象编码器,在服务器对外发送消息时候自动将序列化pojo对象编码
                 ch.pipeline().addLast(new ObjectEncoder());
