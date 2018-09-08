@@ -8,6 +8,10 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+
+/**
+ * 也可以继承SimpleChannelInboundHandler....其子类
+ */
 public class ServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
@@ -27,6 +31,7 @@ public class ServerHandle extends ChannelInboundHandlerAdapter {
         System.out.println("removed");
     }
 
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         int i = buf.readableBytes();
