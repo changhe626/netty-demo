@@ -5,7 +5,10 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.MessageToByteEncoder;
+import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffers;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +20,7 @@ public class MySerialProtocol3 {
 
 
     public static void main(String[] args) {
-        /*
+
         int id = 101;
         double age = 21.1;
 
@@ -36,7 +39,7 @@ public class MySerialProtocol3 {
         //================================================
         ChannelBuffer wrappedBuffer = ChannelBuffers.wrappedBuffer(bytes);
         System.out.println(wrappedBuffer.readInt());
-        System.out.println(wrappedBuffer.readDouble());*/
+        System.out.println(wrappedBuffer.readDouble());
     }
 
     /**
